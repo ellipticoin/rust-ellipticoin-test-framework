@@ -6,6 +6,9 @@ description = "A framework for testing Ellipticoin smart contracts"
 license = "MIT"
 
 [dependencies]
-cask = "0.*"
-wasm-rpc = "0.1.0"
-ellipticoin = "0.1.0"
+wasm-rpc = { path = "../rust-wasm-rpc/wasm-rpc" }
+ellipticoin = { path = "../rust-ellipticoin"}
+secp256k1 = {version = "0.10.0", features = ["rand"]}
+rand = "0.4"
+hex = "0.3.2"
+lazy_static = "1.1.0"
