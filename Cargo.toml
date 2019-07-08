@@ -1,6 +1,6 @@
 [package]
 name = "ellipticoin-test-framework"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Mason Fischer <mason@kissr.co>"]
 description = "A framework for testing Ellipticoin smart contracts"
 license = "MIT"
@@ -8,7 +8,7 @@ license = "MIT"
 [dependencies]
 wasm-rpc = { path = "../rust-wasm-rpc/wasm-rpc" }
 ellipticoin = { path = "../rust-ellipticoin"}
-secp256k1 = {version = "0.10.0", features = ["rand"]}
+secp256k1 = {version = "0.12.2", features = ["rand"]}
 rand = "0.4"
 hex = "0.3.2"
 lazy_static = "1.1.0"

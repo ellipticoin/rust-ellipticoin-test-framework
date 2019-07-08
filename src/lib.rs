@@ -2,8 +2,9 @@ extern crate hex;
 extern crate rand;
 extern crate secp256k1;
 
-#[macro_use]
 extern crate lazy_static;
+use self::rand::{Rng, thread_rng};
+use self::secp256k1::Message;
 
 pub fn alice() -> Vec<u8> {
     hex::decode("02abc074b9843c9d41fe5c46df8a4df6f46309aed0b6620c59ec22a4dcc5e19001").unwrap()
@@ -48,10 +49,6 @@ pub fn mallorys_private_key() -> Vec<u8> {
     hex::decode("e5a386094cac73c84c6cd0e52e21522446b915b7dfcc752ec6cb3d65ec0e2d01").unwrap()
 }
 
-
-use self::rand::{Rng, thread_rng};
-use self::secp256k1::{Secp256k1, Message};
-
 pub fn random_bytes(length: usize) -> Vec<u8> {
     rand::thread_rng()
     .gen_iter::<u8>()
@@ -69,7 +66,7 @@ pub fn generate_keypair() -> (Vec<u8>, Vec<u8>) {
 pub fn secp256k1_sign_recoverable(message_vec: Vec<u8>, private_key_vec: Vec<u8>) -> (u8, Vec<u8>) {
     let signer = secp256k1::Secp256k1::new();
     let message = Message::from_slice(&message_vec).unwrap();
-    let private_key = secp256k1::SecretKey::from_slice(&signer, &private_key_vec).unwrap();
-    let (recovery_id, signature) = signer.sign_recoverable(&message, &private_key).serialize_compact(&signer);
+    let private_key = secp256k1::SecretKey::from_slice(&private_key_vec).unwrap();
+    let (recovery_id, signature) = signer.sign_recoverable(&message, &private_key).serialize_compact();
     (recovery_id.to_i32() as u8, signature.to_vec())
 }
